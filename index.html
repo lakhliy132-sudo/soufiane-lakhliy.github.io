@@ -141,9 +141,17 @@
   .modal-meta{font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.06em;color:var(--accent);margin-bottom:18px}
   .modal-content .tags{margin-bottom:20px}
   .modal-desc p{color:var(--muted);font-size:.98rem;margin-bottom:14px}
-  .modal-video-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:22px 0 8px}
-  .modal-video{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#000}
-  .modal-video video{width:100%;display:block;background:#000}
+  .modal-main-video{width:100%;max-height:100%;display:block;border-radius:8px;background:#000}
+  .modal-thumb-video{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:var(--navy);color:#fff;font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase}
+  .modal-thumb-video svg{width:18px;height:18px}
+  .pn-box{margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px 24px}
+  .pn-box .pn-title{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:14px}
+  .pn-box .pn-title svg{width:20px;height:20px;color:var(--accent);flex-shrink:0}
+  .pn-list{list-style:none;display:flex;flex-direction:column}
+  .pn-list li{font-size:.92rem;color:var(--muted);padding:11px 0 11px 20px;position:relative;border-bottom:1px solid var(--border)}
+  .pn-list li:last-child{border-bottom:0;padding-bottom:0}
+  .pn-list li::before{content:"\25B9";position:absolute;left:0;color:var(--accent)}
+  .pn-list li strong{color:var(--text);font-weight:600}
 
   /* ALTERNANCE */
   .alt-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:center}
@@ -404,6 +412,14 @@
         <p>Réception des tableaux Excel patients et nettoyage initial : identification des valeurs aberrantes, normalisation des formats et préparation du jeu de données pour l'analyse statistique.</p>
         <p>Calcul automatisé de scores cliniques en Python, puis génération de fiches patient personnalisées au format PDF, avec des visualisations lisibles et une interprétation simple des résultats pour les professionnels de santé.</p>
       </div>
+      <div class="pn-box">
+        <div class="pn-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.5 3 6 3s6-2 6-3v-5"/></svg> Compétences Programme National</div>
+        <ul class="pn-list">
+          <li><strong>Traiter des données à des fins décisionnelles</strong> — Nettoyage et transformation des données patients avec Python / Pandas.</li>
+          <li><strong>Développer un outil décisionnel</strong> — Automatisation du calcul des scores cliniques.</li>
+          <li><strong>Valoriser une production en contexte professionnel</strong> — Génération de fiches PDF claires pour les soignants.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -431,6 +447,14 @@
         <p>Conception complète d'une enquête pour le CPIE de Belle-Île-en-Mer : définition des objectifs, rédaction du questionnaire (notoriété, communication, engagement du public) et collecte des réponses via la plateforme Sphinx.</p>
         <p>Analyse statistique des résultats et formulation de recommandations concrètes pour améliorer la visibilité et la communication de l'association.</p>
       </div>
+      <div class="pn-box">
+        <div class="pn-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.5 3 6 3s6-2 6-3v-5"/></svg> Compétences Programme National</div>
+        <ul class="pn-list">
+          <li><strong>Modéliser les données dans un cadre statistique</strong> — Conception du questionnaire et plan de recueil des réponses.</li>
+          <li><strong>Traiter des données à des fins décisionnelles</strong> — Mise en forme et nettoyage des réponses de l'enquête.</li>
+          <li><strong>Valoriser une production en contexte professionnel</strong> — Synthèse et recommandations pour l'association.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -443,11 +467,15 @@
       <div class="modal-main">
         <img src="assets/images/ACP-1.png" alt="ACP visuel">
         <div class="media-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg><span>Image à venir</span></div>
+        <video class="modal-main-video" controls preload="metadata" playsinline style="display:none">
+          <source src="assets/projet-acp.mp4" type="video/mp4">
+          Votre navigateur ne permet pas de lire cette vidéo.
+        </video>
       </div>
       <div class="modal-thumbs">
         <button class="modal-thumb active"><img src="assets/images/ACP-1.png" alt="ACP 1"></button>
-        <button class="modal-thumb"><img src="assets/images/ACP-2.png" alt="ACP 2"></button>
-        <button class="modal-thumb"><img src="assets/images/ACP-3.png" alt="ACP 3"></button>
+        <button class="modal-thumb"><img src="assets/images/ACP-3.png" alt="ACP 2"></button>
+        <button class="modal-thumb modal-thumb-video" data-type="video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Vidéo</button>
       </div>
     </div>
     <div class="modal-content">
@@ -457,14 +485,15 @@
       <div class="tags"><span class="tag">R</span><span class="tag">ACP</span><span class="tag">Stats</span><span class="tag">Visualisation</span></div>
       <div class="modal-desc">
         <p>Analyse en Composantes Principales sur un jeu de données réel : statistiques descriptives, matrice des corrélations, calcul de l'inertie, puis réalisation de l'ACP sous R et interprétation des axes et du plan factoriel.</p>
-        <p>Le projet a donné lieu à un reporting d'analyse multivariée présenté en soutenance, dont voici la vidéo.</p>
+        <p>Le projet a donné lieu à un reporting d'analyse multivariée présenté en soutenance, à retrouver dans la galerie ci-dessus (onglet « Vidéo »).</p>
       </div>
-      <div class="modal-video-label">Vidéo — reporting</div>
-      <div class="modal-video">
-        <video controls preload="metadata" playsinline>
-          <source src="projet-acp.mp4" type="video/mp4">
-          Votre navigateur ne permet pas de lire cette vidéo.
-        </video>
+      <div class="pn-box">
+        <div class="pn-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.5 3 6 3s6-2 6-3v-5"/></svg> Compétences Programme National</div>
+        <ul class="pn-list">
+          <li><strong>Analyser statistiquement les données</strong> — Analyse en Composantes Principales et étude des corrélations.</li>
+          <li><strong>Modéliser les données dans un cadre statistique</strong> — Interprétation des axes et du plan factoriel sous R.</li>
+          <li><strong>Valoriser une production en contexte professionnel</strong> — Reporting d'analyse multivariée présenté en soutenance.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -508,19 +537,19 @@
         <div class="info-list">
           <a class="info-row" href="mailto:lakhliy132@gmail.com">
             <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></span>
-            <span class="txt"><span class="k">Email</span><span class="v">lakhliy132@gmail.com</span></span>
+            <span class="txt"><span class="v">lakhliy132@gmail.com</span></span>
           </a>
           <div class="info-row">
             <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.4-7-11a7 7 0 0 1 14 0c0 5.6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
-            <span class="txt"><span class="k">Localisation</span><span class="v">Vannes · Paris</span></span>
+            <span class="txt"><span class="v">Vannes · Paris</span></span>
           </div>
           <a class="info-row" href="https://www.linkedin.com/in/soufiane-lakhliy-6002b7262" target="_blank" rel="noopener">
             <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM8.34 18V9.99H5.67V18zM7 8.82a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1M18.34 18v-4.39c0-2.34-1.25-3.43-2.92-3.43a2.52 2.52 0 0 0-2.28 1.25V9.99h-2.67V18h2.67v-4.25c0-1.12.21-2.2 1.6-2.2s1.39 1.28 1.39 2.27V18z"/></svg></span>
-            <span class="txt"><span class="k">LinkedIn</span><span class="v">in/soufiane-lakhliy</span></span>
+            <span class="txt"><span class="v">in/soufiane-lakhliy</span></span>
           </a>
           <a class="info-row" href="https://github.com/lakhliy132-sudo" target="_blank" rel="noopener">
             <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></span>
-            <span class="txt"><span class="k">GitHub</span><span class="v">lakhliy132-sudo</span></span>
+            <span class="txt"><span class="v">lakhliy132-sudo</span></span>
           </a>
         </div>
       </div>
@@ -570,19 +599,25 @@
   burger.addEventListener('click', () => links.classList.toggle('open'));
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
-  // Galeries (changer la photo dans le détail)
+  // Galeries (changer la photo / vidéo dans le détail)
   document.querySelectorAll('.modal-gallery').forEach(g => {
     const main = g.querySelector('.modal-main img');
     const fb = g.querySelector('.modal-main .media-fallback');
-    function show(src, alt){
+    const video = g.querySelector('.modal-main-video');
+    function showImage(src, alt){
+      if(video){ video.pause(); video.style.display='none'; }
       main.style.display = ''; if(fb) fb.style.display = 'none';
       main.onerror = () => { main.style.display='none'; if(fb) fb.style.display='flex'; };
       main.src = src; main.alt = alt;
     }
+    function showVideo(){
+      main.style.display = 'none'; if(fb) fb.style.display = 'none';
+      if(video) video.style.display = 'block';
+    }
     g.querySelectorAll('.modal-thumb').forEach(t => {
       t.addEventListener('click', () => {
-        const im = t.querySelector('img');
-        show(im.src, im.alt);
+        if(t.dataset.type === 'video'){ showVideo(); }
+        else { const im = t.querySelector('img'); showImage(im.src, im.alt); }
         g.querySelectorAll('.modal-thumb').forEach(x => x.classList.remove('active'));
         t.classList.add('active');
       });
