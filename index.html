@@ -10,221 +10,142 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --white:#FFFFFF;
-    --surface:#F5F7FA;
-    --surface-2:#EDF1F6;
-    --border:#DCE3EC;
-    --text:#16243A;
-    --muted:#5C6B7E;
-    --navy:#16243A;
-    --navy-700:#1E3354;
-    --navy-500:#2C4A7C;
-    --accent:#3D6FB5;
-    --accent-soft:#E8F0FA;
+    --white:#FFFFFF;--surface:#F5F7FA;--surface-2:#EDF1F6;--border:#DCE3EC;
+    --text:#16243A;--muted:#5C6B7E;--navy:#16243A;--navy-700:#1E3354;--navy-500:#2C4A7C;
+    --accent:#3D6FB5;--accent-soft:#E8F0FA;
     --shadow:0 1px 2px rgba(22,36,58,.06), 0 8px 24px rgba(22,36,58,.06);
     --shadow-lg:0 12px 40px rgba(22,36,58,.12);
-    --radius:16px;
-    --radius-sm:10px;
-    --maxw:1120px;
+    --radius:16px;--radius-sm:10px;--maxw:1120px;
   }
-
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{
-    font-family:'Inter',system-ui,sans-serif;
-    color:var(--text);
-    background:var(--white);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body.modal-open{overflow:hidden}
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
-
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
   section{padding:96px 0}
-
-  .eyebrow{
-    font-family:'JetBrains Mono',monospace;
-    font-size:.72rem;font-weight:600;letter-spacing:.18em;
-    text-transform:uppercase;color:var(--accent);
-    display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;
-  }
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:10px;margin-bottom:18px}
   .eyebrow::before{content:"";width:24px;height:1.5px;background:var(--accent)}
-
-  h2.section-title{
-    font-family:'Sora',sans-serif;font-weight:700;
-    font-size:clamp(1.7rem,3.4vw,2.5rem);letter-spacing:-.02em;line-height:1.12;
-    margin-bottom:14px;
-  }
+  h2.section-title{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.7rem,3.4vw,2.5rem);letter-spacing:-.02em;line-height:1.12;margin-bottom:14px}
   .section-intro{color:var(--muted);max-width:620px;font-size:1.02rem;margin-bottom:46px}
 
-  /* ---------- NAVBAR ---------- */
-  header.nav{
-    position:sticky;top:0;z-index:50;
-    background:rgba(255,255,255,.82);
-    backdrop-filter:saturate(180%) blur(12px);
-    border-bottom:1px solid transparent;
-    transition:border-color .3s, box-shadow .3s;
-  }
+  /* NAVBAR */
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid transparent;transition:border-color .3s, box-shadow .3s}
   header.nav.scrolled{border-color:var(--border);box-shadow:0 6px 20px rgba(22,36,58,.05)}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
   .brand{font-family:'Sora',sans-serif;font-weight:700;font-size:1.08rem;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
-  .brand .mark{
-    width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;
-    display:grid;place-items:center;font-size:.85rem;letter-spacing:.02em;
-  }
+  .brand .mark{width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:.85rem}
   .nav-links{display:flex;align-items:center;gap:34px;list-style:none}
   .nav-links a{font-size:.93rem;font-weight:500;color:var(--muted);transition:color .2s;position:relative}
   .nav-links a:hover{color:var(--text)}
   .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--accent);transition:width .25s}
   .nav-links a:hover::after{width:100%}
-
-  .btn{
-    display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:.92rem;
-    padding:11px 20px;border-radius:10px;border:1px solid transparent;cursor:pointer;
-    transition:transform .15s, background .2s, box-shadow .2s, border-color .2s;font-family:inherit;
-  }
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:.92rem;padding:11px 20px;border-radius:10px;border:1px solid transparent;cursor:pointer;transition:transform .15s, background .2s, box-shadow .2s, border-color .2s;font-family:inherit}
   .btn-primary{background:var(--navy);color:#fff}
   .btn-primary:hover{background:var(--navy-700);transform:translateY(-1px);box-shadow:var(--shadow)}
   .btn-ghost{background:#fff;color:var(--navy);border-color:var(--border)}
   .btn-ghost:hover{border-color:var(--navy-500);transform:translateY(-1px)}
   .btn svg{width:16px;height:16px}
-
   .nav-cta{display:flex;align-items:center;gap:14px}
   .hamburger{display:none;background:none;border:0;cursor:pointer;padding:8px;color:var(--navy)}
   .hamburger svg{width:26px;height:26px}
 
-  /* ---------- HERO ---------- */
+  /* HERO */
   .hero{padding-top:84px;padding-bottom:96px}
   .hero-grid{display:grid;grid-template-columns:1.25fr .9fr;gap:64px;align-items:center}
-  .hero-status{
-    font-family:'JetBrains Mono',monospace;font-size:.74rem;font-weight:600;letter-spacing:.1em;
-    color:var(--accent);background:var(--accent-soft);border:1px solid #d4e3f5;
-    padding:7px 14px;border-radius:999px;display:inline-flex;align-items:center;gap:9px;margin-bottom:26px;
-  }
-  .hero-status .dot{width:8px;height:8px;border-radius:50%;background:#2f9e63;box-shadow:0 0 0 4px rgba(47,158,99,.18)}
-  .hero h1{
-    font-family:'Sora',sans-serif;font-weight:800;letter-spacing:-.03em;line-height:1.04;
-    font-size:clamp(2.4rem,5.2vw,3.7rem);margin-bottom:20px;
-  }
+  .hero-status{font-family:'JetBrains Mono',monospace;font-size:.74rem;font-weight:600;letter-spacing:.1em;color:var(--accent);background:var(--accent-soft);border:1px solid #d4e3f5;padding:7px 14px;border-radius:999px;display:inline-flex;align-items:center;gap:9px;margin-bottom:26px}
+  .hero h1{font-family:'Sora',sans-serif;font-weight:800;letter-spacing:-.03em;line-height:1.04;font-size:clamp(2.4rem,5.2vw,3.7rem);margin-bottom:20px}
   .hero h1 .accent{color:var(--accent)}
   .hero-role{font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--navy-500);font-weight:500;margin-bottom:22px}
   .hero p.lead{font-size:1.12rem;color:var(--muted);max-width:520px;margin-bottom:34px}
   .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
   .hero-meta{display:flex;gap:30px;flex-wrap:wrap}
-  .hero-meta .item{font-size:.9rem}
   .hero-meta .item .k{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px}
   .hero-meta .item .v{font-weight:600;color:var(--text)}
-
   .hero-photo{justify-self:end;position:relative}
-  .photo-frame{
-    width:300px;height:340px;border-radius:24px;overflow:hidden;
-    border:6px solid var(--navy);background:var(--surface-2);
-    box-shadow:var(--shadow-lg);position:relative;
-  }
+  .photo-frame{width:300px;height:340px;border-radius:24px;overflow:hidden;border:6px solid var(--navy);background:var(--surface-2);box-shadow:var(--shadow-lg);position:relative}
   .photo-frame img{width:100%;height:100%;object-fit:cover}
-  .photo-frame .media-fallback{
-    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    flex-direction:column;gap:8px;color:var(--navy-500);text-align:center;padding:20px;
-  }
+  .photo-frame .media-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--navy-500);text-align:center;padding:20px}
   .photo-frame .media-fallback span{font-family:'JetBrains Mono',monospace;font-size:.78rem}
-  .photo-badge{
-    position:absolute;bottom:-18px;left:-26px;background:#fff;border:1px solid var(--border);
-    border-radius:14px;padding:13px 17px;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;
-  }
+  .photo-badge{position:absolute;bottom:-18px;left:-26px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:13px 17px;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px}
   .photo-badge .icon{width:38px;height:38px;border-radius:10px;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent)}
   .photo-badge .icon svg{width:20px;height:20px}
   .photo-badge .t{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
   .photo-badge .s{font-weight:700;font-size:.95rem;font-family:'Sora',sans-serif}
 
-  /* ---------- ABOUT ---------- */
+  /* ABOUT */
   .about{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
   .about-text p{color:var(--muted);margin-bottom:18px;font-size:1.04rem}
   .about-text p strong{color:var(--text);font-weight:600}
   .next-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
-  .next-card .eyebrow{margin-bottom:14px}
   .next-card h3{font-family:'Sora',sans-serif;font-size:1.2rem;margin-bottom:16px;letter-spacing:-.01em}
   .next-list{list-style:none;display:flex;flex-direction:column;gap:13px}
   .next-list li{display:flex;gap:12px;font-size:.97rem;color:var(--muted)}
   .next-list li svg{width:18px;height:18px;color:var(--accent);flex-shrink:0;margin-top:3px}
 
-  /* ---------- COMPETENCES ---------- */
+  /* COMPETENCES */
   .comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .comp-card{
-    background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px;
-    transition:transform .2s, box-shadow .2s, border-color .2s;position:relative;overflow:hidden;
-  }
+  .comp-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:transform .2s, box-shadow .2s, border-color .2s;position:relative;overflow:hidden}
   .comp-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:#c7d4e3}
   .comp-card .code{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:600;letter-spacing:.12em;color:var(--accent);background:var(--accent-soft);padding:5px 10px;border-radius:7px;display:inline-block;margin-bottom:18px}
   .comp-card h3{font-family:'Sora',sans-serif;font-size:1.12rem;line-height:1.3;margin-bottom:10px;letter-spacing:-.01em}
   .comp-card p{color:var(--muted);font-size:.93rem}
   .comp-card .num{position:absolute;top:18px;right:22px;font-family:'Sora',sans-serif;font-weight:800;font-size:1.5rem;color:var(--surface-2)}
 
-  /* ---------- PROJETS ---------- */
+  /* PROJETS */
   .projects{background:var(--navy);color:#fff}
   .projects .eyebrow{color:#7fb0e8}
   .projects .eyebrow::before{background:#7fb0e8}
   .projects .section-intro{color:#aebed2}
   .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-  .proj-card{
-    background:#fff;color:var(--text);border-radius:var(--radius);overflow:hidden;
-    display:flex;flex-direction:column;box-shadow:var(--shadow);
-    transition:transform .22s, box-shadow .22s;
-  }
+  .proj-card{background:#fff;color:var(--text);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .22s, box-shadow .22s}
   .proj-card:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(0,0,0,.3)}
-  /* carrousel projet */
-  .carousel{position:relative;aspect-ratio:16/10;background:var(--surface-2);overflow:hidden}
-  .carousel-track{display:flex;height:100%;transition:transform .4s ease}
-  @media (prefers-reduced-motion:reduce){.carousel-track{transition:none}}
-  .slide{flex:0 0 100%;height:100%;position:relative}
-  .slide img{width:100%;height:100%;object-fit:cover;display:block}
-  .slide .media-fallback{
-    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;
-    background:linear-gradient(135deg,var(--navy-700),var(--navy-500));color:#fff;
-  }
-  .slide .media-fallback svg{width:34px;height:34px;opacity:.85}
-  .slide .media-fallback span{font-family:'JetBrains Mono',monospace;font-size:.74rem;letter-spacing:.04em;opacity:.9;text-align:center;padding:0 16px}
-  .carousel-btn{
-    position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;
-    background:rgba(22,36,58,.55);color:#fff;border:0;cursor:pointer;display:grid;place-items:center;
-    backdrop-filter:blur(4px);transition:background .2s;z-index:2;opacity:0;
-  }
-  .carousel:hover .carousel-btn,.carousel:focus-within .carousel-btn{opacity:1}
-  .carousel-btn:hover{background:var(--navy)}
-  .carousel-btn svg{width:18px;height:18px}
-  .carousel-btn.prev{left:12px}
-  .carousel-btn.next{right:12px}
-  .carousel-dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:2}
-  .carousel-dots button{width:8px;height:8px;border-radius:50%;border:0;cursor:pointer;background:rgba(255,255,255,.5);padding:0;transition:background .2s, width .2s}
-  .carousel-dots button.active{background:#fff;width:20px;border-radius:5px}
-  .carousel-count{position:absolute;top:12px;right:12px;z-index:2;font-family:'JetBrains Mono',monospace;font-size:.66rem;color:#fff;background:rgba(22,36,58,.55);padding:4px 9px;border-radius:7px;backdrop-filter:blur(4px)}
-  @media (max-width:560px){.carousel-btn{opacity:1}}
-  .proj-body{padding:26px;display:flex;flex-direction:column;flex:1}
-  .proj-body h3{font-family:'Sora',sans-serif;font-size:1.22rem;letter-spacing:-.01em;margin-bottom:11px;line-height:1.25}
-  .proj-body .desc{color:var(--muted);font-size:.95rem;margin-bottom:18px}
+  .proj-cover{aspect-ratio:16/10;background:#fff;display:grid;place-items:center;padding:22px;position:relative;border-bottom:1px solid var(--border)}
+  .proj-cover img{max-width:100%;max-height:100%;object-fit:contain}
+  .proj-cover .media-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:linear-gradient(135deg,var(--navy-700),var(--navy-500));color:#fff}
+  .proj-cover .media-fallback svg{width:34px;height:34px;opacity:.85}
+  .proj-cover .media-fallback span{font-family:'JetBrains Mono',monospace;font-size:.76rem;opacity:.9}
+  .proj-badge{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);border:1px solid #d4e3f5;padding:5px 12px;border-radius:999px;display:inline-block}
+  .proj-body{padding:24px;display:flex;flex-direction:column;flex:1}
+  .proj-body .proj-badge{margin-bottom:14px;align-self:flex-start}
+  .proj-body h3{font-family:'Sora',sans-serif;font-size:1.18rem;letter-spacing:-.01em;margin-bottom:11px;line-height:1.28}
+  .proj-body .desc{color:var(--muted);font-size:.94rem;margin-bottom:18px}
   .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
   .tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:500;color:var(--navy-500);background:var(--surface);border:1px solid var(--border);padding:5px 10px;border-radius:7px}
-  .proj-toggle{
-    margin-top:auto;align-self:flex-start;background:var(--navy);color:#fff;border:0;
-    font-family:inherit;font-weight:600;font-size:.88rem;padding:10px 18px;border-radius:9px;cursor:pointer;
-    display:inline-flex;align-items:center;gap:8px;transition:background .2s;
-  }
-  .proj-toggle:hover{background:var(--navy-700)}
-  .proj-toggle svg{width:15px;height:15px;transition:transform .25s}
-  .proj-card.open .proj-toggle svg{transform:rotate(180deg)}
-  .proj-details{max-height:0;overflow:hidden;transition:max-height .35s ease;border-top:0 solid var(--border)}
-  .proj-card.open .proj-details{max-height:1100px;border-top:1px solid var(--border);margin-top:22px}
-  .proj-details-inner{padding-top:20px}
-  .proj-details h4{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
-  .proj-details p{font-size:.9rem;color:var(--muted);margin-bottom:16px}
-  .proj-details ul{list-style:none;margin-bottom:6px}
-  .proj-details ul li{font-size:.9rem;color:var(--muted);padding-left:18px;position:relative;margin-bottom:6px}
-  .proj-details ul li::before{content:"▹";position:absolute;left:0;color:var(--accent)}
-  .proj-video{margin-top:6px;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);background:#000}
-  .proj-video video{width:100%;display:block;background:#000}
+  .proj-link{margin-top:auto;align-self:flex-start;background:none;border:0;color:var(--accent);font-family:inherit;font-weight:600;font-size:.92rem;cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:0}
+  .proj-link svg{width:15px;height:15px;transition:transform .2s}
+  .proj-link:hover svg{transform:translateX(4px)}
 
-  /* ---------- ALTERNANCE ---------- */
+  /* MODAL DETAIL */
+  .modal-overlay{position:fixed;inset:0;background:rgba(10,18,32,.62);backdrop-filter:blur(4px);z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:5vh 20px;opacity:0;visibility:hidden;transition:opacity .25s, visibility .25s;overflow-y:auto}
+  .modal-overlay.open{opacity:1;visibility:visible}
+  .modal{background:#fff;border-radius:20px;max-width:720px;width:100%;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4);transform:translateY(20px);transition:transform .3s;position:relative;margin:auto}
+  .modal-overlay.open .modal{transform:none}
+  .modal-close{position:absolute;top:16px;right:16px;z-index:3;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--navy);cursor:pointer;display:grid;place-items:center;box-shadow:var(--shadow)}
+  .modal-close:hover{background:#fff}
+  .modal-close svg{width:20px;height:20px}
+  .modal-main{aspect-ratio:16/10;background:var(--surface-2);display:grid;place-items:center;padding:18px;position:relative}
+  .modal-main img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
+  .modal-main .media-fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:var(--navy-500)}
+  .modal-main .media-fallback svg{width:34px;height:34px}
+  .modal-main .media-fallback span{font-family:'JetBrains Mono',monospace;font-size:.76rem}
+  .modal-thumbs{display:flex;gap:10px;padding:14px 18px;background:var(--surface);border-bottom:1px solid var(--border);overflow-x:auto}
+  .modal-thumb{flex:0 0 auto;width:76px;height:54px;border-radius:8px;overflow:hidden;border:2px solid transparent;cursor:pointer;background:var(--surface-2);padding:0}
+  .modal-thumb.active{border-color:var(--accent)}
+  .modal-thumb img{width:100%;height:100%;object-fit:cover}
+  .modal-content{padding:28px 30px 34px}
+  .modal-content .proj-badge{margin-bottom:14px}
+  .modal-content h3{font-family:'Sora',sans-serif;font-size:1.5rem;letter-spacing:-.01em;margin-bottom:8px;line-height:1.2}
+  .modal-meta{font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.06em;color:var(--accent);margin-bottom:18px}
+  .modal-content .tags{margin-bottom:20px}
+  .modal-desc p{color:var(--muted);font-size:.98rem;margin-bottom:14px}
+  .modal-video-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:22px 0 8px}
+  .modal-video{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#000}
+  .modal-video video{width:100%;display:block;background:#000}
+
+  /* ALTERNANCE */
   .alt-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:center}
   .alt-card-logo{display:inline-flex;align-items:center;gap:14px;margin-bottom:24px}
   .alt-card-logo .lg{width:54px;height:54px;border-radius:13px;background:var(--navy);color:#fff;display:grid;place-items:center;font-family:'Sora',sans-serif;font-weight:700;font-size:1.05rem}
@@ -240,42 +161,39 @@
   .alt-visual .media-fallback svg{width:34px;height:34px}
   .alt-visual .media-fallback span{font-family:'JetBrains Mono',monospace;font-size:.78rem}
 
-  /* ---------- CONTACT ---------- */
+  /* CONTACT */
   .contact{background:var(--surface);border-top:1px solid var(--border)}
-  .contact-head{text-align:center;margin-bottom:48px}
-  .contact-head .section-intro{margin:0 auto}
-  .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:840px;margin:0 auto 40px}
-  .contact-card{
-    background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;text-align:center;
-    transition:transform .2s, box-shadow .2s;
-  }
-  .contact-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-  .contact-card .ic{width:48px;height:48px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin:0 auto 16px}
-  .contact-card .ic svg{width:22px;height:22px}
-  .contact-card .lbl{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-  .contact-card .val{font-weight:600;font-size:.95rem;word-break:break-word}
-  .contact-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+  .contact-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start}
+  .contact-info .lead{color:var(--muted);font-size:1.04rem;max-width:420px}
+  .info-list{display:flex;flex-direction:column;gap:16px;margin-top:32px}
+  .info-row{display:flex;align-items:center;gap:16px}
+  .info-row .ic{width:46px;height:46px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;flex-shrink:0}
+  .info-row .ic svg{width:20px;height:20px}
+  .info-row .txt .k{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+  .info-row .txt .v{font-weight:600;font-size:.96rem;word-break:break-word;transition:color .2s}
+  a.info-row:hover .txt .v{color:var(--accent)}
+  .contact-form{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow)}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .field input,.field textarea{width:100%;padding:13px 15px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.95rem;color:var(--text);background:var(--surface);transition:border-color .2s, box-shadow .2s, background .2s}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);background:#fff}
+  .field textarea{resize:vertical;min-height:130px}
+  .form-submit{width:100%;justify-content:center;margin-top:4px}
 
-  /* ---------- FOOTER ---------- */
+  /* FOOTER */
   footer{background:var(--navy);color:#aebed2;padding:36px 0}
   .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:.88rem}
   .footer-inner .brand-f{font-family:'Sora',sans-serif;color:#fff;font-weight:700}
 
-  /* reveal animation */
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease}
   .reveal.in{opacity:1;transform:none}
 
-  /* ---------- RESPONSIVE ---------- */
   @media (max-width:900px){
     .hero-grid{grid-template-columns:1fr;gap:48px}
     .hero-photo{justify-self:start;order:-1}
-    .about-grid,.alt-grid{grid-template-columns:1fr;gap:40px}
-    .comp-grid,.proj-grid,.contact-grid{grid-template-columns:1fr}
-    .nav-links{
-      position:absolute;top:72px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);
-      flex-direction:column;align-items:flex-start;gap:0;padding:8px 28px 18px;
-      box-shadow:var(--shadow);display:none;
-    }
+    .about-grid,.alt-grid,.contact-layout{grid-template-columns:1fr;gap:40px}
+    .comp-grid,.proj-grid{grid-template-columns:1fr}
+    .nav-links{position:absolute;top:72px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);flex-direction:column;align-items:flex-start;gap:0;padding:8px 28px 18px;box-shadow:var(--shadow);display:none}
     .nav-links.open{display:flex}
     .nav-links a{padding:13px 0;width:100%;border-bottom:1px solid var(--surface-2)}
     .nav-links a::after{display:none}
@@ -288,6 +206,7 @@
     .hero h1{font-size:2.1rem}
     .photo-frame{width:100%;max-width:300px;height:320px}
     .hero-meta{gap:22px}
+    .modal-content{padding:24px 22px 30px}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
@@ -299,7 +218,7 @@
 </head>
 <body>
 
-<!-- ============ NAVBAR ============ -->
+<!-- NAVBAR -->
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
     <a href="#hero" class="brand"><span class="mark">SL</span> Soufiane Lakhliy</a>
@@ -313,7 +232,7 @@
       </ul>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-ghost" href="Soufiane_Lakhliy_CV.pdf" download>
+      <a class="btn btn-ghost" href="Soufiane_Lakhliy_CV.pdf" download="Soufiane_Lakhliy_CV.pdf">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         Télécharger mon CV
       </a>
@@ -324,7 +243,7 @@
   </div>
 </header>
 
-<!-- ============ HERO ============ -->
+<!-- HERO -->
 <section class="hero" id="hero">
   <div class="wrap hero-grid">
     <div class="hero-text reveal">
@@ -333,11 +252,10 @@
       <div class="hero-role">Étudiant en BUT Sciences des Données — IUT de Vannes</div>
       <p class="lead">Je transforme des données complexes en outils de décision clairs, fiables et faciles à lire. De la collecte au tableau de bord interactif, j'accompagne chaque étape de la chaîne de traitement de l'information.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#projets">
-          Voir mes projets
+        <a class="btn btn-primary" href="#projets">Voir mes projets
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a class="btn btn-ghost" href="Soufiane_Lakhliy_CV.pdf" download>
+        <a class="btn btn-ghost" href="Soufiane_Lakhliy_CV.pdf" download="Soufiane_Lakhliy_CV.pdf">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
           Télécharger mon CV
         </a>
@@ -358,13 +276,13 @@
       </div>
       <div class="photo-badge">
         <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 3 3 5-6"/></svg></span>
-        <span><span class="t">Spécialité</span><br><span class="s">Data & Décisionnel</span></span>
+        <span><span class="t">Spécialité</span><br><span class="s">Data &amp; Décisionnel</span></span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ À PROPOS ============ -->
+<!-- À PROPOS -->
 <section class="about" id="about">
   <div class="wrap">
     <div class="about-grid">
@@ -388,7 +306,7 @@
   </div>
 </section>
 
-<!-- ============ COMPÉTENCES ============ -->
+<!-- COMPÉTENCES -->
 <section id="competences">
   <div class="wrap">
     <div class="reveal">
@@ -406,109 +324,55 @@
   </div>
 </section>
 
-<!-- ============ PROJETS ============ -->
+<!-- PROJETS -->
 <section class="projects" id="projets">
   <div class="wrap">
     <div class="reveal">
       <span class="eyebrow">Projets · SAÉ</span>
       <h2 class="section-title">Mes projets à l'IUT</h2>
-      <p class="section-intro">Une sélection de Situations d'Apprentissage et d'Évaluation (SAÉ) menées pendant ma formation. Cliquez sur « Voir les détails » pour le lien avec les compétences et les outils.</p>
+      <p class="section-intro">Une sélection de projets menés pendant ma formation. Cliquez sur « Voir le détail » pour parcourir les visuels et la description complète.</p>
     </div>
     <div class="proj-grid">
 
-      <!-- Projet 1 : AP-HP -->
       <article class="proj-card reveal">
-        <div class="carousel" data-carousel>
-          <div class="carousel-track">
-            <div class="slide"><img src="assets/images/APHp-1.png" alt="Projet AP-HP 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-fallback" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span>AP-HP — photo 1</span></div></div>
-            <div class="slide"><img src="assets/images/APHP-2.png" alt="Projet AP-HP 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-fallback" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span>AP-HP — photo 2</span></div></div>
-            <div class="slide"><img src="assets/images/projet_1_APHP_2.png" alt="Projet AP-HP 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-fallback" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span>AP-HP — photo 3</span></div></div>
-          </div>
-          <button class="carousel-btn prev" aria-label="Photo précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button class="carousel-btn next" aria-label="Photo suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
-          <div class="carousel-dots"></div>
+        <div class="proj-cover">
+          <img src="assets/images/aphp_logo.png" alt="AP-HP" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="media-fallback" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span>aphp_logo.png</span></div>
         </div>
         <div class="proj-body">
+          <span class="proj-badge">Data · Santé</span>
           <h3>Analyse de données médicales — AP-HP</h3>
-          <p class="desc">Projet d'analyse de jeux de données patients pour l'AP-HP, incluant le nettoyage des données, l'analyse statistique et la création de visualisations.</p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Mathématiques</span><span class="tag">Analyse médicale</span></div>
-          <button class="proj-toggle" aria-expanded="false">Voir les détails <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-          <div class="proj-details">
-            <div class="proj-details-inner">
-              <h4>Ce que j'ai fait</h4>
-              <p>À partir des réponses de patients à des questionnaires cliniques validés, j'ai traité les données avec un script Python (nettoyage, calcul de scores, positionnement de chaque patient par rapport à la cohorte) et généré une fiche patient personnalisée au format PDF avec des visualisations lisibles.</p>
-              <h4>Compétences travaillées</h4>
-              <ul><li>Traiter des données à des fins décisionnelles</li><li>Analyser statistiquement les données</li><li>Valoriser une production en contexte professionnel</li></ul>
-              <h4>Rendus</h4>
-              <p>Script Python d'automatisation et fiches patient PDF avec scores et interprétation.</p>
-            </div>
-          </div>
+          <p class="desc">Traitement de données patients, calcul automatisé de scores cliniques en Python et génération de fiches PDF personnalisées.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">PDF</span><span class="tag">Santé</span></div>
+          <button class="proj-link" data-modal="modal-aphp">Voir le détail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </article>
 
-      <!-- Projet 2 : CPIE -->
       <article class="proj-card reveal">
-        <div class="carousel" data-carousel>
-          <div class="carousel-track">
-            <div class="slide"><img src="assets/images/SAE106.png" alt="Projet CPIE 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-fallback" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/></svg><span>CPIE — photo 1</span></div></div>
-            <div class="slide"><img src="assets/images/SAE106-2.png" alt="Projet CPIE 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-fallback" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/></svg><span>CPIE — photo 2</span></div></div>
-          </div>
-          <button class="carousel-btn prev" aria-label="Photo précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button class="carousel-btn next" aria-label="Photo suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
-          <div class="carousel-dots"></div>
+        <div class="proj-cover">
+          <img src="assets/images/cpie_logo.png" alt="CPIE" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="media-fallback" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/></svg><span>cpie_logo.png</span></div>
         </div>
         <div class="proj-body">
-          <h3>Étude statistique environnementale</h3>
-          <p class="desc">Conception de questionnaires et analyse des données pour une étude sur la connaissance des visiteurs de la Maison de la Nature (CPIE).</p>
-          <div class="tags"><span class="tag">Excel</span><span class="tag">Questionnaires</span><span class="tag">Analyse corrélationnelle</span></div>
-          <button class="proj-toggle" aria-expanded="false">Voir les détails <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-          <div class="proj-details">
-            <div class="proj-details-inner">
-              <h4>Ce que j'ai fait</h4>
-              <p>Mise en œuvre d'une enquête complète pour le CPIE : définition des objectifs, conception du questionnaire, collecte des réponses puis analyse des résultats (notoriété, communication, engagement du public) afin de formuler des recommandations.</p>
-              <h4>Compétences travaillées</h4>
-              <ul><li>Modéliser les données dans un cadre statistique</li><li>Traiter des données à des fins décisionnelles</li><li>Valoriser une production en contexte professionnel</li></ul>
-              <h4>Rendus</h4>
-              <p>Questionnaire structuré, traitement des réponses et synthèse des résultats pour l'association.</p>
-            </div>
-          </div>
+          <span class="proj-badge">Terrain</span>
+          <h3>Étude statistique environnementale — CPIE</h3>
+          <p class="desc">Conception d'un questionnaire et analyse statistique pour le CPIE de Belle-Île-en-Mer.</p>
+          <div class="tags"><span class="tag">Sphinx</span><span class="tag">Excel</span><span class="tag">Stats</span><span class="tag">Enquête</span></div>
+          <button class="proj-link" data-modal="modal-cpie">Voir le détail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </article>
 
-      <!-- Projet 3 : ACP / Régression -->
       <article class="proj-card reveal">
-        <div class="carousel" data-carousel>
-          <div class="carousel-track">
-            <div class="slide"><img src="assets/images/ACP-1.png" alt="Projet ACP 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-fallback" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18M7 14l3-3 4 4 6-7"/></svg><span>ACP — photo 1</span></div></div>
-            <div class="slide"><img src="assets/images/ACP-2.png" alt="Projet ACP 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-fallback" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18M7 14l3-3 4 4 6-7"/></svg><span>ACP — photo 2</span></div></div>
-            <div class="slide"><img src="assets/images/ACP-3.png" alt="Projet ACP 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="media-fallback" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18M7 14l3-3 4 4 6-7"/></svg><span>ACP — photo 3</span></div></div>
-          </div>
-          <button class="carousel-btn prev" aria-label="Photo précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button class="carousel-btn next" aria-label="Photo suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
-          <div class="carousel-dots"></div>
+        <div class="proj-cover">
+          <img src="assets/images/customer.png" alt="Analyse multivariée" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="media-fallback" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18M7 14l3-3 4 4 6-7"/></svg><span>customer.png</span></div>
         </div>
         <div class="proj-body">
-          <h3>Analyse multivariée sur données réelles</h3>
-          <p class="desc">Réalisation d'une analyse descriptive et factorielle (ACP) visant à décrire des variables et à explorer les liens entre elles à l'aide de synthèses graphiques et numériques.</p>
-          <div class="tags"><span class="tag">R</span><span class="tag">ACP</span><span class="tag">Statistique descriptive</span><span class="tag">Visualisation</span></div>
-          <button class="proj-toggle" aria-expanded="false">Voir les détails <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-          <div class="proj-details">
-            <div class="proj-details-inner">
-              <h4>Ce que j'ai fait</h4>
-              <p>Analyse en Composantes Principales d'un jeu de données réel : statistiques descriptives, matrice des corrélations, calcul de l'inertie, puis ACP sous R (R-Shiny) avec interprétation des axes factoriels et du plan factoriel.</p>
-              <h4>Compétences travaillées</h4>
-              <ul><li>Analyser statistiquement les données</li><li>Modéliser les données dans un cadre statistique</li><li>Valoriser une production en contexte professionnel</li></ul>
-              <h4>Rendus</h4>
-              <p>Reporting d'analyse multivariée et interprétation du plan factoriel des individus et des variables.</p>
-              <h4>Vidéo — reporting</h4>
-              <div class="proj-video">
-                <video controls preload="metadata" playsinline>
-                  <source src="projet-acp.mp4" type="video/mp4">
-                  Votre navigateur ne permet pas de lire cette vidéo. Vous pouvez la télécharger.
-                </video>
-              </div>
-            </div>
-          </div>
+          <span class="proj-badge">Analyse</span>
+          <h3>Analyse multivariée — Segmentation</h3>
+          <p class="desc">Analyse en Composantes Principales et reporting d'une analyse multivariée sous R.</p>
+          <div class="tags"><span class="tag">R</span><span class="tag">ACP</span><span class="tag">Stats</span><span class="tag">Visualisation</span></div>
+          <button class="proj-link" data-modal="modal-acp">Voir le détail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </article>
 
@@ -516,7 +380,97 @@
   </div>
 </section>
 
-<!-- ============ ALTERNANCE ============ -->
+<!-- MODAL AP-HP -->
+<div class="modal-overlay" id="modal-aphp" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Détail du projet AP-HP">
+    <button class="modal-close" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div class="modal-gallery">
+      <div class="modal-main">
+        <img src="assets/images/APHp-1.png" alt="AP-HP visuel">
+        <div class="media-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg><span>Image à venir</span></div>
+      </div>
+      <div class="modal-thumbs">
+        <button class="modal-thumb active"><img src="assets/images/APHp-1.png" alt="AP-HP 1"></button>
+        <button class="modal-thumb"><img src="assets/images/APHP-2.png" alt="AP-HP 2"></button>
+        <button class="modal-thumb"><img src="assets/images/projet_1_APHP_2.png" alt="AP-HP 3"></button>
+      </div>
+    </div>
+    <div class="modal-content">
+      <span class="proj-badge">Data · Santé</span>
+      <h3>Analyse de données médicales — AP-HP</h3>
+      <div class="modal-meta">Projet de groupe · BUT Sciences des Données</div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">PDF</span><span class="tag">Santé</span></div>
+      <div class="modal-desc">
+        <p>Réception des tableaux Excel patients et nettoyage initial : identification des valeurs aberrantes, normalisation des formats et préparation du jeu de données pour l'analyse statistique.</p>
+        <p>Calcul automatisé de scores cliniques en Python, puis génération de fiches patient personnalisées au format PDF, avec des visualisations lisibles et une interprétation simple des résultats pour les professionnels de santé.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CPIE -->
+<div class="modal-overlay" id="modal-cpie" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Détail du projet CPIE">
+    <button class="modal-close" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div class="modal-gallery">
+      <div class="modal-main">
+        <img src="assets/images/SAE106.png" alt="CPIE visuel">
+        <div class="media-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg><span>Image à venir</span></div>
+      </div>
+      <div class="modal-thumbs">
+        <button class="modal-thumb active"><img src="assets/images/SAE106.png" alt="CPIE 1"></button>
+        <button class="modal-thumb"><img src="assets/images/SAE106-2.png" alt="CPIE 2"></button>
+      </div>
+    </div>
+    <div class="modal-content">
+      <span class="proj-badge">Terrain</span>
+      <h3>Étude statistique environnementale — CPIE</h3>
+      <div class="modal-meta">Enquête de terrain · BUT Sciences des Données</div>
+      <div class="tags"><span class="tag">Sphinx</span><span class="tag">Excel</span><span class="tag">Stats</span><span class="tag">Enquête</span></div>
+      <div class="modal-desc">
+        <p>Conception complète d'une enquête pour le CPIE de Belle-Île-en-Mer : définition des objectifs, rédaction du questionnaire (notoriété, communication, engagement du public) et collecte des réponses via la plateforme Sphinx.</p>
+        <p>Analyse statistique des résultats et formulation de recommandations concrètes pour améliorer la visibilité et la communication de l'association.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ACP -->
+<div class="modal-overlay" id="modal-acp" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Détail du projet analyse multivariée">
+    <button class="modal-close" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div class="modal-gallery">
+      <div class="modal-main">
+        <img src="assets/images/ACP-1.png" alt="ACP visuel">
+        <div class="media-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg><span>Image à venir</span></div>
+      </div>
+      <div class="modal-thumbs">
+        <button class="modal-thumb active"><img src="assets/images/ACP-1.png" alt="ACP 1"></button>
+        <button class="modal-thumb"><img src="assets/images/ACP-2.png" alt="ACP 2"></button>
+        <button class="modal-thumb"><img src="assets/images/ACP-3.png" alt="ACP 3"></button>
+      </div>
+    </div>
+    <div class="modal-content">
+      <span class="proj-badge">Analyse</span>
+      <h3>Analyse multivariée — Segmentation</h3>
+      <div class="modal-meta">Reporting d'analyse multivariée · BUT Sciences des Données</div>
+      <div class="tags"><span class="tag">R</span><span class="tag">ACP</span><span class="tag">Stats</span><span class="tag">Visualisation</span></div>
+      <div class="modal-desc">
+        <p>Analyse en Composantes Principales sur un jeu de données réel : statistiques descriptives, matrice des corrélations, calcul de l'inertie, puis réalisation de l'ACP sous R et interprétation des axes et du plan factoriel.</p>
+        <p>Le projet a donné lieu à un reporting d'analyse multivariée présenté en soutenance, dont voici la vidéo.</p>
+      </div>
+      <div class="modal-video-label">Vidéo — reporting</div>
+      <div class="modal-video">
+        <video controls preload="metadata" playsinline>
+          <source src="projet-acp.mp4" type="video/mp4">
+          Votre navigateur ne permet pas de lire cette vidéo.
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ALTERNANCE -->
 <section class="alt" id="alternance">
   <div class="wrap">
     <div class="reveal">
@@ -533,73 +487,82 @@
         <p>Au sein du GIP SESAN, j'interviens sur le développement front-end d'un tableau de bord destiné au suivi des indicateurs d'usage d'une plateforme régionale de coordination en santé, à destination de l'ARS Île-de-France et des équipes internes.</p>
         <p>Mon travail couvre la conception de l'interface, la mise en place des filtres dynamiques, des graphiques interactifs et des cartes, ainsi que la restitution claire des indicateurs pour les utilisateurs métiers.</p>
         <p>Cette expérience m'a permis de monter en compétence sur le développement d'applications web décisionnelles, la manipulation de bases de données et le travail en équipe projet dans un environnement professionnel exigeant.</p>
-        <div class="stack">
-          <span class="tag">R Shiny</span><span class="tag">golem</span><span class="tag">PostgreSQL</span><span class="tag">echarts4r</span><span class="tag">leaflet</span><span class="tag">Figma</span><span class="tag">GitLab</span>
-        </div>
+        <div class="stack"><span class="tag">R Shiny</span><span class="tag">golem</span><span class="tag">PostgreSQL</span><span class="tag">echarts4r</span><span class="tag">leaflet</span><span class="tag">Figma</span><span class="tag">GitLab</span></div>
       </div>
       <div class="alt-visual reveal">
         <img src="assets/images/dataviz_projet_alternance.png" alt="Aperçu du tableau de bord" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="media-fallback" style="display:none;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          <span>images/sesan-dashboard.png</span>
-        </div>
+        <div class="media-fallback" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>assets/images/dataviz_projet_alternance.png</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ CONTACT ============ -->
+<!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <div class="contact-head reveal">
-      <span class="eyebrow" style="justify-content:center">Contact</span>
-      <h2 class="section-title">Contactez-moi</h2>
-      <p class="section-intro">Une opportunité, une question ou simplement envie d'échanger ? N'hésitez pas à me contacter.</p>
-    </div>
-    <div class="contact-grid">
-      <a class="contact-card reveal" href="mailto:lakhliy132@gmail.com">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></span>
-        <div class="lbl">Email</div>
-        <div class="val">lakhliy132@gmail.com</div>
-      </a>
-      <a class="contact-card reveal" href="https://www.linkedin.com/in/soufiane-lakhliy" target="_blank" rel="noopener">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM8.34 18V9.99H5.67V18zM7 8.82a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1M18.34 18v-4.39c0-2.34-1.25-3.43-2.92-3.43a2.52 2.52 0 0 0-2.28 1.25V9.99h-2.67V18h2.67v-4.25c0-1.12.21-2.2 1.6-2.2s1.39 1.28 1.39 2.27V18z"/></svg></span>
-        <div class="lbl">LinkedIn</div>
-        <div class="val">Soufiane Lakhliy</div>
-      </a>
-      <a class="contact-card reveal" href="https://github.com/lakhliy132-sudo" target="_blank" rel="noopener">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></span>
-        <div class="lbl">GitHub</div>
-        <div class="val">lakhliy132-sudo</div>
-      </a>
-    </div>
-    <div class="contact-actions reveal">
-      <a class="btn btn-primary" href="mailto:lakhliy132@gmail.com">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
-        M'envoyer un email
-      </a>
-      <a class="btn btn-ghost" href="Soufiane_Lakhliy_CV.pdf" download>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-        Télécharger mon CV
-      </a>
+    <div class="contact-layout">
+      <div class="contact-info reveal">
+        <span class="eyebrow">Contact</span>
+        <h2 class="section-title">Contactez-moi</h2>
+        <p class="lead">Une question, un échange ou une collaboration ? Écrivez-moi directement, je vous répondrai rapidement.</p>
+        <div class="info-list">
+          <a class="info-row" href="mailto:lakhliy132@gmail.com">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></span>
+            <span class="txt"><span class="k">Email</span><span class="v">lakhliy132@gmail.com</span></span>
+          </a>
+          <div class="info-row">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.4-7-11a7 7 0 0 1 14 0c0 5.6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+            <span class="txt"><span class="k">Localisation</span><span class="v">Vannes · Paris</span></span>
+          </div>
+          <a class="info-row" href="https://www.linkedin.com/in/soufiane-lakhliy-6002b7262" target="_blank" rel="noopener">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM8.34 18V9.99H5.67V18zM7 8.82a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1M18.34 18v-4.39c0-2.34-1.25-3.43-2.92-3.43a2.52 2.52 0 0 0-2.28 1.25V9.99h-2.67V18h2.67v-4.25c0-1.12.21-2.2 1.6-2.2s1.39 1.28 1.39 2.27V18z"/></svg></span>
+            <span class="txt"><span class="k">LinkedIn</span><span class="v">in/soufiane-lakhliy</span></span>
+          </a>
+          <a class="info-row" href="https://github.com/lakhliy132-sudo" target="_blank" rel="noopener">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></span>
+            <span class="txt"><span class="k">GitHub</span><span class="v">lakhliy132-sudo</span></span>
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form reveal" id="contactForm">
+        <div class="field">
+          <label for="cf-nom">Nom</label>
+          <input type="text" id="cf-nom" name="nom" placeholder="Votre nom" required>
+        </div>
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" placeholder="votre@email.com" required>
+        </div>
+        <div class="field">
+          <label for="cf-sujet">Sujet</label>
+          <input type="text" id="cf-sujet" name="sujet" placeholder="Sujet de votre message">
+        </div>
+        <div class="field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" placeholder="Votre message..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Envoyer
+        </button>
+      </form>
     </div>
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
+<!-- FOOTER -->
 <footer>
   <div class="wrap footer-inner">
     <span><span class="brand-f">Soufiane Lakhliy</span> · Data Analyst</span>
-    <span>© <span id="year"></span> — Portfolio BUT Sciences des Données</span>
+    <span>&copy; <span id="year"></span> — Portfolio BUT Sciences des Données</span>
   </div>
 </footer>
 
 <script>
-  // Navbar shadow on scroll
+  // Navbar shadow
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 8);
-  });
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 8));
 
   // Mobile menu
   const burger = document.getElementById('hamburger');
@@ -607,64 +570,70 @@
   burger.addEventListener('click', () => links.classList.toggle('open'));
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
-  // Project details toggle
-  document.querySelectorAll('.proj-toggle').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.proj-card');
-      const open = card.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open);
-      btn.childNodes[0].textContent = open ? 'Réduire ' : 'Voir les détails ';
+  // Galeries (changer la photo dans le détail)
+  document.querySelectorAll('.modal-gallery').forEach(g => {
+    const main = g.querySelector('.modal-main img');
+    const fb = g.querySelector('.modal-main .media-fallback');
+    function show(src, alt){
+      main.style.display = ''; if(fb) fb.style.display = 'none';
+      main.onerror = () => { main.style.display='none'; if(fb) fb.style.display='flex'; };
+      main.src = src; main.alt = alt;
+    }
+    g.querySelectorAll('.modal-thumb').forEach(t => {
+      t.addEventListener('click', () => {
+        const im = t.querySelector('img');
+        show(im.src, im.alt);
+        g.querySelectorAll('.modal-thumb').forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+      });
     });
   });
 
-  // Scroll reveal
+  // Modales (ouvrir / fermer le détail)
+  let lastFocused = null;
+  document.querySelectorAll('[data-modal]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const m = document.getElementById(btn.dataset.modal);
+      if (!m) return;
+      lastFocused = btn;
+      m.classList.add('open');
+      m.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      const c = m.querySelector('.modal-close'); if (c) c.focus();
+    });
+  });
+  function closeModal(m){
+    m.classList.remove('open');
+    m.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    const v = m.querySelector('video'); if (v) v.pause();
+    if (lastFocused) lastFocused.focus();
+  }
+  document.querySelectorAll('.modal-overlay').forEach(m => {
+    m.addEventListener('click', e => { if (e.target === m) closeModal(m); });
+    m.querySelector('.modal-close').addEventListener('click', () => closeModal(m));
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape'){ const open = document.querySelector('.modal-overlay.open'); if (open) closeModal(open); }
+  });
+
+  // Formulaire de contact -> ouvre le client mail pré-rempli
+  document.getElementById('contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const nom = document.getElementById('cf-nom').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const sujet = document.getElementById('cf-sujet').value.trim() || 'Contact depuis le portfolio';
+    const message = document.getElementById('cf-message').value.trim();
+    const corps = 'Nom : ' + nom + '\nEmail : ' + email + '\n\n' + message;
+    window.location.href = 'mailto:lakhliy132@gmail.com?subject=' + encodeURIComponent(sujet) + '&body=' + encodeURIComponent(corps);
+  });
+
+  // Reveal
   const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    entries.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
   }, {threshold:.12});
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // Carrousels projets
-  document.querySelectorAll('[data-carousel]').forEach(car => {
-    const track = car.querySelector('.carousel-track');
-    const slides = Array.from(car.querySelectorAll('.slide'));
-    const dotsWrap = car.querySelector('.carousel-dots');
-    const prev = car.querySelector('.carousel-btn.prev');
-    const next = car.querySelector('.carousel-btn.next');
-    let i = 0;
-
-    if (slides.length <= 1){
-      if(prev) prev.style.display='none';
-      if(next) next.style.display='none';
-    }
-    slides.forEach((_, idx) => {
-      const d = document.createElement('button');
-      d.setAttribute('aria-label', 'Photo ' + (idx+1));
-      if (idx === 0) d.classList.add('active');
-      d.addEventListener('click', () => go(idx));
-      dotsWrap.appendChild(d);
-    });
-    const dots = Array.from(dotsWrap.children);
-
-    function go(n){
-      i = (n + slides.length) % slides.length;
-      track.style.transform = 'translateX(' + (-i*100) + '%)';
-      dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));
-    }
-    if(prev) prev.addEventListener('click', () => go(i-1));
-    if(next) next.addEventListener('click', () => go(i+1));
-
-    // glissement tactile
-    let startX = null;
-    car.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive:true});
-    car.addEventListener('touchend', e => {
-      if (startX === null) return;
-      const dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) > 40) go(dx < 0 ? i+1 : i-1);
-      startX = null;
-    });
-  });
-
-  // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
