@@ -276,7 +276,7 @@
     </div>
     <div class="hero-photo reveal">
       <div class="photo-frame">
-        <img src="assets/images/photo.jpg" alt="Photo de Soufiane Lakhliy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <img src="assets/images/photo.jpg" alt="Photo de Soufiane Lakhliy" onerror="if(!this.dataset.retry){this.dataset.retry='1';this.src='photo.jpg';}else{this.style.display='none';this.nextElementSibling.style.display='flex';}">
         <div class="media-fallback" style="display:none;">
           <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
           <span>assets/images/photo.jpg</span>
