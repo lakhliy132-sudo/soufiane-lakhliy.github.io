@@ -87,12 +87,12 @@
 
   /* COMPETENCES */
   .comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .comp-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:transform .2s, box-shadow .2s, border-color .2s;position:relative;overflow:hidden}
+  .comp-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:transform .2s, box-shadow .2s, border-color .2s;position:relative;overflow:hidden;display:flex;flex-direction:column}
   .comp-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:#c7d4e3}
   .comp-card .code{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:600;letter-spacing:.12em;color:var(--accent);background:var(--accent-soft);padding:5px 10px;border-radius:7px;display:inline-block;margin-bottom:18px}
   .comp-card h3{font-family:'Sora',sans-serif;font-size:1.12rem;line-height:1.3;margin-bottom:10px;letter-spacing:-.01em}
   .comp-card p{color:var(--muted);font-size:.93rem}
-  .comp-card .num{position:absolute;top:18px;right:22px;font-family:'Sora',sans-serif;font-weight:800;font-size:1.5rem;color:var(--surface-2)}
+  .comp-card .num{order:3;margin-top:20px;align-self:flex-end;font-family:'Sora',sans-serif;font-weight:800;font-size:1.6rem;color:var(--surface-2)}
 
   /* PROJETS */
   .projects{background:var(--navy);color:#fff}
